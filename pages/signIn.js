@@ -1,20 +1,18 @@
 import {useRef} from "react";
 import {getSession, signIn} from 'next-auth/client'
-
+import {useForm} from "react-hook-form";
 
 const SignIn = () => {
-    const email = useRef()
-    const password = useRef()
-    const signInService = async  () => {
-        console.log(email.current.value, password.current.value)
+    const {register, handleSubmit} = useForm()
+    const submit = async (data) => {
         await signIn("credentials", {
             redirect: true,
-            callbackUrl:'/',
-            username: email.current.value,
-            password: password.current.value,
+            callbackUrl: '/',
+            username: data.email,
+            password: data.password
         })
     }
-    return <div style={{
+    return <form style={{
         display: "flex",
         flexDirection: "column",
         width: "100%",
@@ -22,15 +20,15 @@ const SignIn = () => {
         justifyContent: "center",
         alignItems: "center"
     }
-    }>
+    } onSubmit={handleSubmit(submit)}>
         <h1>SignIn</h1>
-        <input ref={email} type='email' style={{
+        <input {...register('email')} type='email' style={{
             height: '50px',
             width: "300px"
         }
         }/>
 
-        <input ref={password} type='password' style={{
+        <input  {...register('password')} type='password' style={{
             height: '50px',
             width: "300px"
         }
@@ -42,10 +40,10 @@ const SignIn = () => {
             backgroundColor: "#000",
             color: "#fff"
         }
-        } onClick={signInService}>
+        }>
             sign in
         </button>
-    </div>
+    </form>
 }
 
 
@@ -64,4 +62,5 @@ export async function getServerSideProps(context) {
         props: {}
     }
 }
+
 export default SignIn

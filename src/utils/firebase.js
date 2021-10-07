@@ -1,30 +1,31 @@
-import firebase from 'firebase';
-
-
+import firebase from "firebase";
+import { getStorage } from "firebase/storage";
 export function initialize() {
-    // Initialize Firebase
-    console.log(firebase.apps, firebase.apps.length)
-    if (!firebase.apps.length) {
-        firebase.initializeApp({
-            apiKey: "AIzaSyAZ0Rt6PglnQwuobCPB7bZn_ONS012yg48",
-            authDomain: "fir-next-auth-596ea.firebaseapp.com",
-            projectId: "fir-next-auth-596ea",
-            storageBucket: "fir-next-auth-596ea.appspot.com",
-            messagingSenderId: "918180536247",
-            appId: "1:918180536247:web:a997401882de4496dc1232"
-        });
-    }
+  // Initialize Firebase
+  console.log(firebase.apps, firebase.apps.length);
+  if (!firebase.apps.length) {
+    firebase.initializeApp({
+      apiKey: "AIzaSyCGhuN2VytrTxhRfiibbX2vG2wHqZkt_5I",
+      authDomain: "familly-managment.firebaseapp.com",
+      projectId: "familly-managment",
+      storageBucket: "familly-managment.appspot.com",
+      messagingSenderId: "457122305877",
+      appId: "1:457122305877:web:306bd73afcf1992fb281dc",
+    });
+  }
 }
 
-
-initialize()
+initialize();
 
 const signInWithEmailAndPassword = async (email, password) => {
-    const data = await firebase.auth().signInWithEmailAndPassword(email, password)
-    return data;
-}
+  const data = await firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password);
+  return data;
+};
 
+const uploadFileToStorage = (file) => {
+  firebase.storage().ref(`images/${file.name}`).put(file);
+};
 
-export {
-    signInWithEmailAndPassword
-}
+export { signInWithEmailAndPassword, uploadFileToStorage };

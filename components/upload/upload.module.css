@@ -1,0 +1,10 @@
+.btn {
+  margin: auto;
+  width: 95%;
+  max-width: 25rem;
+  border-radius: 6px;
+  background-color: #38015c;
+  box-shadow: 0 1px 1px rgba(80, 80, 80, 0.2);
+  padding: 0.3rem;
+  text-align: center;
+}

@@ -1,9 +1,13 @@
 import { getSession, useSession, signOut } from "next-auth/client";
-import StartingPageContent from "../components/starting-page/starting-page";
+import UserProfile from "../components/profil/user-profile";
 
-export default function Home() {
-  return <StartingPageContent />;
-}
+const ProfilePage = (props) => {
+  console.log(props);
+
+  return <UserProfile />;
+};
+
+export default ProfilePage;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -18,6 +22,6 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: {},
+    props: { session },
   };
 }
